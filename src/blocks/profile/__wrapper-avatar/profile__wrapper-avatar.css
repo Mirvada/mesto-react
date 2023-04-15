@@ -1,0 +1,35 @@
+.profile__wrapper-avatar{
+  padding: 0;
+  margin-right: 30px;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.profile__wrapper-avatar::before {
+  content: "";
+  background: rgba(0, 0, 0, .8) url(../../../images/btn-edit.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 50%;
+}
+
+.profile__wrapper-avatar:hover::before {
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__wrapper-avatar {
+    margin: 0 auto 26px auto;
+    flex-direction: column;
+  }
+}
