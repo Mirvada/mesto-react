@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { api } from "../utils/Api.js";
+import React, { useContext } from "react";
 import Card from "./Card.jsx";
+import { CurrentUserContext } from "./contexts/CurrentUserContext.jsx";
 
 const Main = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cardList]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(...cards, cardList);
-      })
-      .catch((err) => console.log(`ошибка: ${err}`));
-  }, []);
+  const userData = useContext(CurrentUserContext);
 
   return (
     <main>
@@ -25,19 +11,19 @@ const Main = (props) => {
         <div className="profile__wrapper-avatar" onClick={props.onEditAvatar}>
           <img
             className="profile__avatar"
-            src={userAvatar}
+            src={userData.avatar}
             alt="фото профиля"
           />
         </div>
         <div className="profile__info">
-          <h1 className="profile__nickname">{userName}</h1>
+          <h1 className="profile__nickname">{userData.name}</h1>
           <button
             className="profile__button-edit"
             type="button"
             aria-label="редактировать"
             onClick={props.onEditProfile}
           ></button>
-          <p className="profile__user-info">{userDescription}</p>
+          <p className="profile__user-info">{userData.about}</p>
         </div>
         <button
           className="profile__button-add"
@@ -47,7 +33,7 @@ const Main = (props) => {
         ></button>
       </section>
       <section className="cards" aria-label="секция блога">
-        {cards.map((card) => {
+        {props.cards.map((card) => {
           return (
             <Card
               key={card._id}
@@ -56,6 +42,8 @@ const Main = (props) => {
               link={card.link}
               likes={card.likes.length}
               onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
             />
           );
         })}

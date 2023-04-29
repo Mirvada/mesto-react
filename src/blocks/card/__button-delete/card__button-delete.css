@@ -11,6 +11,7 @@
   right: 20px;
   transition: opacity 0.5s ease;
   cursor: pointer;
+  filter: drop-shadow(0 0 2px #000);
 }
 
 .card__button-delete:hover {

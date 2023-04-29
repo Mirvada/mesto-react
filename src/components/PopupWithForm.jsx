@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const PopupWithForm = (props) => {
   return (
@@ -16,7 +16,16 @@ const PopupWithForm = (props) => {
           onClick={props.onClose}
         ></button>
         <h2 className="popup__title">{props.title}</h2>
-        {props.children}
+        <form
+          className={`popup__form popup__${props.name}`}
+          name={`form-${props.name}`}
+          onSubmit={props.onSubmit}
+        >
+          {props.children}
+          <button className="popup__button-save" type="submit">
+            {props.buttonName}
+          </button>
+        </form>
       </div>
     </div>
   );
