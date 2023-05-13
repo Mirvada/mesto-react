@@ -1,0 +1,13 @@
+.register__singin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.register__singin p {
+  margin-right: 5px;
+}

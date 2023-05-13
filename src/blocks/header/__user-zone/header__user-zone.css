@@ -1,0 +1,5 @@
+.header__user-zone {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
